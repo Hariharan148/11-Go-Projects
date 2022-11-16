@@ -1,4 +1,4 @@
-module github.com/Hariharan148/11-Go-Projects
+module github.com/Hariharan148/11-Go-Projects/go-bookstore
 
 go 1.19
 
