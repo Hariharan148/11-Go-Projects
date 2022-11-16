@@ -1,8 +1,8 @@
-package main 
+package main
 
 import (
-	"github.com/jinzhu/gorm"
 	"github.com/Hariharan148/11-Go-Projects/go-bookstore/pkg/config"
+	"github.com/jinzhu/gorm"
 )
 
 
@@ -19,5 +19,33 @@ type Book struct{
 func init(){
 	config.Connect()
 	db = config.getDB()
-	DB.AutoMigrate(&Book{})
+	db.AutoMigrate(&Book{})
+}
+
+
+func (b *Book) CreateBook() *Book{
+	db.NewRecord(b)
+	db.Create(&b)
+	return b
+}
+
+
+func GetAllBooks() []Book{
+	var books []Book
+	db.Find(&books)
+	return books
+
+}
+
+func GetBookById(id int64)  (*Book, *gorm.DB){
+	var GetBook Book
+	db := db.Where("ID=?", id).Find(&GetBook)
+	return &GetBook , db
+}
+
+
+func DeleteBook(id int64) Book{
+	var book Book
+	db.Where("ID=?", id).Delete(book)
+	return book
 }
