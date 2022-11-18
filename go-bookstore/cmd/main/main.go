@@ -13,5 +13,5 @@ func main(){
 	r := mux.NewRouter()
 	routes.RegisterBookRoutes(r)
 	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe(":3306", r))
+	log.Fatal(http.ListenAndServe("localhost:3306", r))
 }
